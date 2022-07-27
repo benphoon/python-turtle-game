@@ -1,5 +1,7 @@
 # Python Turtle Graphics Game - Space Turtle Chomp
 import turtle
+import math
+import random
 
 # Set Up Screen
 turtle.setup(650, 650)
@@ -24,8 +26,17 @@ player.color('darkorange')
 player.shape('turtle')
 player.penup()
 
+
 # Set speed variable
 speed = 1
+
+# Create food
+food = turtle.Turtle()
+food.color("lightgreen")
+food.shape("circle")
+food.penup()
+food.speed(0)
+food.setposition(random.randint(-290, 290), random.randint(-290, 290))
 
 # Define movement functions
 
@@ -64,3 +75,9 @@ while True:
     # boundary player checking y coordinate
     if player.ycor() > 290 or player.ycor() < -290:
         player.right(180)
+
+    # collision checking
+    d = math.sqrt(math.pow(player.xcor() - food.xcor(), 2) +
+                  math.pow(player.ycor() - food.ycor(), 2))
+    if d < 20:
+        food.setposition(random.randint(-290, 290), random.randint(-290, 290))
