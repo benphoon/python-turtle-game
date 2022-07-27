@@ -38,7 +38,7 @@ food.penup()
 food.speed(0)
 food.setposition(random.randint(-290, 290), random.randint(-290, 290))
 
-# Define movement functions
+# Define functions
 
 
 def turn_left():
@@ -59,6 +59,15 @@ def reduce_speed():
     speed -= 1
 
 
+def isCollision(t1, t2):
+    d = math.sqrt(math.pow(t1.xcor()-t2.xcor(), 2) +
+                  math.pow(t1.ycor()-t2.ycor(), 2))
+    if d < 20:
+        return True
+    else:
+        return False
+
+
 # Set keyboard binding
 turtle.listen()
 turtle.onkey(turn_left, "Left")
@@ -77,7 +86,5 @@ while True:
         player.right(180)
 
     # collision checking
-    d = math.sqrt(math.pow(player.xcor() - food.xcor(), 2) +
-                  math.pow(player.ycor() - food.ycor(), 2))
-    if d < 20:
+    if isCollision(player, food):
         food.setposition(random.randint(-290, 290), random.randint(-290, 290))
