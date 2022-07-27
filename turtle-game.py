@@ -85,6 +85,18 @@ while True:
     if player.ycor() > 290 or player.ycor() < -290:
         player.right(180)
 
+     # Boundary Food Checking x coordinate
+    if food.xcor() > 290 or food.xcor() < -290:
+        food.right(180)
+
+    # Boundary Food Checking y coordinate
+    if food.ycor() > 290 or food.ycor() < -290:
+        food.right(180)
+
+    # move food around
+    food.forward(3)
+
     # collision checking
     if isCollision(player, food):
         food.setposition(random.randint(-290, 290), random.randint(-290, 290))
+        food.right(random.randint(0, 360))
