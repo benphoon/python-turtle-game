@@ -29,6 +29,9 @@ player.color('darkorange')
 player.shape('turtle')
 player.penup()
 
+# Create variable score
+score = 0
+
 
 # Set speed variable
 speed = 1
@@ -116,3 +119,12 @@ while True:
                              random.randint(-290, 290))
             food.right(random.randint(0, 360))
             os.system('afplay chomp.mp3&')
+            score += 1
+            # Draw score on screen
+            mypen.undo()
+            mypen.penup()
+            mypen.hideturtle()
+            mypen.setposition(-290, 310)
+            scorestring = "Score: %s" % score
+            mypen.write(scorestring, False, align='left',
+                        font=('Arial', 14, 'normal'))
