@@ -2,12 +2,14 @@
 import turtle
 import math
 import random
+import os
 
 # Set Up Screen
 turtle.setup(650, 650)
 wn = turtle.Screen()
 wn.bgcolor('navy')
-wn.tracer(3)
+wn.bgpic('space-bg.gif')
+wn.tracer(5)
 
 # Draw border
 mypen = turtle.Turtle()
@@ -32,7 +34,7 @@ player.penup()
 speed = 1
 
 # Create food
-maxFoods = 6
+maxFoods = 10
 foods = []
 for count in range(maxFoods):
     food = turtle.Turtle()
@@ -42,6 +44,8 @@ for count in range(maxFoods):
     food.speed(0)
     food.setposition(random.randint(-290, 290), random.randint(-290, 290))
     foods.append(food)
+for food in foods:
+    food.shapesize(.5)
 
 # Define functions
 
@@ -85,10 +89,12 @@ while True:
     # boundary player checking x coordinate
     if player.xcor() > 290 or player.xcor() < -290:
         player.right(180)
+        os.system('afplay bounce.mp3&')
 
     # boundary player checking y coordinate
     if player.ycor() > 290 or player.ycor() < -290:
         player.right(180)
+        os.system('afplay bounce.mp3&')
 
     # move food around
     for food in foods:
@@ -97,13 +103,16 @@ while True:
         # Boundary Food Checking x coordinate
         if food.xcor() > 290 or food.xcor() < -290:
             food.right(180)
+            os.system('afplay bounce.mp3&')
 
         # Boundary Food Checking y coordinate
         if food.ycor() > 290 or food.ycor() < -290:
             food.right(180)
+            os.system('afplay bounce.mp3&')
 
         # collision checking
         if isCollision(player, food):
             food.setposition(random.randint(-290, 290),
                              random.randint(-290, 290))
             food.right(random.randint(0, 360))
+            os.system('afplay chomp.mp3&')
